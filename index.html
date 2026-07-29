@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Growth Center Density Analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="au_acre_far_existing_files/libs/clipboard/clipboard.min.js"></script>
+<script src="au_acre_far_existing_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="au_acre_far_existing_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="au_acre_far_existing_files/libs/quarto-html/popper.min.js"></script>
+<script src="au_acre_far_existing_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="au_acre_far_existing_files/libs/quarto-html/anchor.min.js"></script>
+<link href="au_acre_far_existing_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="au_acre_far_existing_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="au_acre_far_existing_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="au_acre_far_existing_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="au_acre_far_existing_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="au_acre_far_existing_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="au_acre_far_existing_files/libs/bootstrap/bootstrap-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="au_acre_far_existing_files/libs/bootstrap/bootstrap-dark-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="au_acre_far_existing_files/libs/bootstrap/bootstrap-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="au_acre_far_existing_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="au_acre_far_existing_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="au_acre_far_existing_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="au_acre_far_existing_files/libs/quarto-dashboard/components.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Growth Center Density Analysis</a></div>
+        
+        
+      </div>
+    </div>
+</div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">  
+
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 20fr) minmax(3em, 40fr) minmax(3em, 40fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-primary showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="building" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-building"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Growth Centers
+</p>
+<p class="value-box-value">
+40
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-info showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="people-fill" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-people-fill"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Total Activity Units
+</p>
+<p class="value-box-value">
+1,273,771
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-success showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="map" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-map"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Total Acres
+</p>
+<p class="value-box-value">
+7,109
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-warning showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="graph-up" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-graph-up"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Average AU / Acre
+</p>
+<p class="value-box-value">
+196.7
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-title="Activity Units per Acre vs. FAR" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Activity Units per Acre vs.&nbsp;FAR
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output cell-output-display html-fill-item html-fill-container">
+<img src="au_acre_far_existing_files/figure-html/cell-15-output-1.png" class="quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-title="FAR by Growth Center" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+FAR by Growth Center
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output cell-output-display html-fill-item html-fill-container" data-execution_count="15">
+<div class="html-fill-item html-fill-container">
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">county</th>
+<th data-quarto-table-cell-role="th">growth_center</th>
+<th data-quarto-table-cell-role="th">gross_sqft_non_res</th>
+<th data-quarto-table-cell-role="th">gross_sqft_res</th>
+<th data-quarto-table-cell-role="th">land_area_non_res</th>
+<th data-quarto-table-cell-role="th">land_area_res</th>
+<th data-quarto-table-cell-role="th">gross_sqft_all</th>
+<th data-quarto-table-cell-role="th">land_area_all</th>
+<th data-quarto-table-cell-role="th">far_res</th>
+<th data-quarto-table-cell-role="th">far_non_res</th>
+<th data-quarto-table-cell-role="th">far_all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>King</td>
+<td>Auburn</td>
+<td>3326850.0</td>
+<td>1768626.0</td>
+<td>2076877.0</td>
+<td>849680.0</td>
+<td>5095476.0</td>
+<td>2926557.0</td>
+<td>2.081520</td>
+<td>1.601852</td>
+<td>1.741116</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>King</td>
+<td>Bellevue</td>
+<td>40617329.0</td>
+<td>10636173.0</td>
+<td>5655822.0</td>
+<td>1284029.0</td>
+<td>51253502.0</td>
+<td>6939851.0</td>
+<td>8.283437</td>
+<td>7.181508</td>
+<td>7.385389</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>King</td>
+<td>Burien</td>
+<td>3381113.0</td>
+<td>1806127.0</td>
+<td>2465222.0</td>
+<td>785208.0</td>
+<td>5187240.0</td>
+<td>3250430.0</td>
+<td>2.300189</td>
+<td>1.371525</td>
+<td>1.595863</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>King</td>
+<td>Federal Way</td>
+<td>2494599.0</td>
+<td>261635.0</td>
+<td>1566212.0</td>
+<td>37376.0</td>
+<td>2756234.0</td>
+<td>1603588.0</td>
+<td>7.000080</td>
+<td>1.592759</td>
+<td>1.718792</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>King</td>
+<td>Kent</td>
+<td>2994430.0</td>
+<td>1186542.0</td>
+<td>1819170.0</td>
+<td>303968.0</td>
+<td>4180972.0</td>
+<td>2123138.0</td>
+<td>3.903510</td>
+<td>1.646042</td>
+<td>1.969242</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>King</td>
+<td>Kirkland Totem Lake</td>
+<td>7743882.0</td>
+<td>5871758.0</td>
+<td>4213091.0</td>
+<td>1033508.0</td>
+<td>13615640.0</td>
+<td>5246599.0</td>
+<td>5.681386</td>
+<td>1.838052</td>
+<td>2.595136</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>King</td>
+<td>Redmond Downtown</td>
+<td>5805982.0</td>
+<td>8424325.0</td>
+<td>2743656.0</td>
+<td>1640602.0</td>
+<td>14230307.0</td>
+<td>4384258.0</td>
+<td>5.134899</td>
+<td>2.116148</td>
+<td>3.245773</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>King</td>
+<td>Redmond-Overlake</td>
+<td>24173230.0</td>
+<td>5922963.0</td>
+<td>7751590.0</td>
+<td>1143342.0</td>
+<td>30096193.0</td>
+<td>8894932.0</td>
+<td>5.180395</td>
+<td>3.118487</td>
+<td>3.383521</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>King</td>
+<td>Renton</td>
+<td>10509394.0</td>
+<td>3814252.0</td>
+<td>4357776.0</td>
+<td>1105974.0</td>
+<td>14323646.0</td>
+<td>5463750.0</td>
+<td>3.448772</td>
+<td>2.411642</td>
+<td>2.621578</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>King</td>
+<td>SeaTac</td>
+<td>9012023.0</td>
+<td>4138448.0</td>
+<td>2686966.0</td>
+<td>1653087.0</td>
+<td>13150471.0</td>
+<td>4340053.0</td>
+<td>2.503467</td>
+<td>3.353977</td>
+<td>3.030025</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>King</td>
+<td>Seattle Downtown</td>
+<td>106017353.0</td>
+<td>28306047.0</td>
+<td>12716737.0</td>
+<td>1931272.0</td>
+<td>134323400.0</td>
+<td>14648009.0</td>
+<td>14.656686</td>
+<td>8.336836</td>
+<td>9.170079</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>King</td>
+<td>Seattle First Hill/Capitol Hill</td>
+<td>26603996.0</td>
+<td>31755983.0</td>
+<td>6367437.0</td>
+<td>6124728.0</td>
+<td>58359979.0</td>
+<td>12492165.0</td>
+<td>5.184881</td>
+<td>4.178133</td>
+<td>4.671727</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>King</td>
+<td>Seattle Northgate</td>
+<td>7038034.0</td>
+<td>4117507.0</td>
+<td>2708774.0</td>
+<td>973085.0</td>
+<td>11155541.0</td>
+<td>3681859.0</td>
+<td>4.231395</td>
+<td>2.598236</td>
+<td>3.029866</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>King</td>
+<td>Seattle South Lake Union</td>
+<td>27928988.0</td>
+<td>10764320.0</td>
+<td>4540084.0</td>
+<td>1387660.0</td>
+<td>38693308.0</td>
+<td>5927744.0</td>
+<td>7.757174</td>
+<td>6.151646</td>
+<td>6.527493</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>King</td>
+<td>Seattle University District</td>
+<td>19432808.0</td>
+<td>11063824.0</td>
+<td>3604764.0</td>
+<td>2429555.0</td>
+<td>30496632.0</td>
+<td>6034319.0</td>
+<td>4.553848</td>
+<td>5.390868</td>
+<td>5.053865</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>King</td>
+<td>Seattle Uptown</td>
+<td>11894505.0</td>
+<td>7437450.0</td>
+<td>4296579.0</td>
+<td>1373034.0</td>
+<td>19331955.0</td>
+<td>5669613.0</td>
+<td>5.416800</td>
+<td>2.768366</td>
+<td>3.409749</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>King</td>
+<td>Tukwila</td>
+<td>11799611.0</td>
+<td>762467.0</td>
+<td>9271510.0</td>
+<td>61875.0</td>
+<td>12562078.0</td>
+<td>9333385.0</td>
+<td>12.322699</td>
+<td>1.272674</td>
+<td>1.345929</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>King</td>
+<td>Issaquah</td>
+<td>5754328.0</td>
+<td>NaN</td>
+<td>2912984.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1.975407</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>King</td>
+<td>Greater Downtown Kirkland</td>
+<td>7061133.0</td>
+<td>5812630.0</td>
+<td>3122979.0</td>
+<td>1200167.0</td>
+<td>12873763.0</td>
+<td>4323146.0</td>
+<td>4.843184</td>
+<td>2.261025</td>
+<td>2.977869</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>King</td>
+<td>Ballard-Interbay</td>
+<td>13301660.0</td>
+<td>94446.0</td>
+<td>7623928.0</td>
+<td>63362.0</td>
+<td>13396106.0</td>
+<td>7687290.0</td>
+<td>1.490578</td>
+<td>1.744725</td>
+<td>1.742630</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>King</td>
+<td>Duwamish</td>
+<td>47021275.0</td>
+<td>136027.0</td>
+<td>33736574.0</td>
+<td>103073.0</td>
+<td>47157302.0</td>
+<td>33839647.0</td>
+<td>1.319715</td>
+<td>1.393777</td>
+<td>1.393552</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>King</td>
+<td>Kent MIC</td>
+<td>48870291.0</td>
+<td>174448.0</td>
+<td>46134697.0</td>
+<td>79487.0</td>
+<td>49044739.0</td>
+<td>46214184.0</td>
+<td>2.194673</td>
+<td>1.059296</td>
+<td>1.061249</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>King</td>
+<td>North Tukwila</td>
+<td>8608547.0</td>
+<td>11410.0</td>
+<td>5170483.0</td>
+<td>7705.0</td>
+<td>8619957.0</td>
+<td>5178188.0</td>
+<td>1.480857</td>
+<td>1.664941</td>
+<td>1.664667</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>Kitsap</td>
+<td>Bremerton</td>
+<td>6631105.0</td>
+<td>880354.0</td>
+<td>1268674.0</td>
+<td>602974.0</td>
+<td>7511459.0</td>
+<td>1871648.0</td>
+<td>1.460020</td>
+<td>5.226800</td>
+<td>4.013286</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>Kitsap</td>
+<td>Silverdale</td>
+<td>5914648.0</td>
+<td>1215715.0</td>
+<td>3870624.0</td>
+<td>682057.0</td>
+<td>7130363.0</td>
+<td>4552681.0</td>
+<td>1.782424</td>
+<td>1.528086</td>
+<td>1.566190</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25</th>
+<td>Kitsap</td>
+<td>Puget Sound Industrial Center - Bremerton</td>
+<td>350459.0</td>
+<td>17554.0</td>
+<td>326420.0</td>
+<td>10877.0</td>
+<td>368013.0</td>
+<td>337297.0</td>
+<td>1.613864</td>
+<td>1.073644</td>
+<td>1.091065</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>Pierce</td>
+<td>Lakewood</td>
+<td>2473034.0</td>
+<td>260670.0</td>
+<td>1950611.0</td>
+<td>176701.0</td>
+<td>2733704.0</td>
+<td>2127312.0</td>
+<td>1.475204</td>
+<td>1.267825</td>
+<td>1.285051</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">27</th>
+<td>Pierce</td>
+<td>Puyallup Downtown</td>
+<td>1436087.0</td>
+<td>574832.0</td>
+<td>983702.0</td>
+<td>399292.0</td>
+<td>2010919.0</td>
+<td>1382994.0</td>
+<td>1.439628</td>
+<td>1.459880</td>
+<td>1.454033</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>Pierce</td>
+<td>Puyallup South Hill</td>
+<td>4826983.0</td>
+<td>1120741.0</td>
+<td>2999482.0</td>
+<td>710850.0</td>
+<td>5947724.0</td>
+<td>3710332.0</td>
+<td>1.576621</td>
+<td>1.609272</td>
+<td>1.603017</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>Pierce</td>
+<td>Tacoma Downtown</td>
+<td>23140324.0</td>
+<td>10193759.0</td>
+<td>8329112.0</td>
+<td>2632266.0</td>
+<td>33334083.0</td>
+<td>10961378.0</td>
+<td>3.872617</td>
+<td>2.778246</td>
+<td>3.041049</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">30</th>
+<td>Pierce</td>
+<td>Tacoma Mall</td>
+<td>4142611.0</td>
+<td>2573966.0</td>
+<td>3183996.0</td>
+<td>1232474.0</td>
+<td>6716577.0</td>
+<td>4416470.0</td>
+<td>2.088455</td>
+<td>1.301073</td>
+<td>1.520802</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>Pierce</td>
+<td>University Place</td>
+<td>2240780.0</td>
+<td>3142137.0</td>
+<td>1618172.0</td>
+<td>1363926.0</td>
+<td>5382917.0</td>
+<td>2982098.0</td>
+<td>2.303744</td>
+<td>1.384760</td>
+<td>1.805077</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">32</th>
+<td>Pierce</td>
+<td>Frederickson</td>
+<td>13168195.0</td>
+<td>322157.0</td>
+<td>11468975.0</td>
+<td>204372.0</td>
+<td>13490352.0</td>
+<td>11673347.0</td>
+<td>1.576327</td>
+<td>1.148158</td>
+<td>1.155654</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>Pierce</td>
+<td>Port of Tacoma</td>
+<td>10718562.0</td>
+<td>2452.0</td>
+<td>9492821.0</td>
+<td>1926.0</td>
+<td>10721014.0</td>
+<td>9494747.0</td>
+<td>1.273105</td>
+<td>1.129123</td>
+<td>1.129152</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>Pierce</td>
+<td>Sumner Pacific</td>
+<td>19619378.0</td>
+<td>23521.0</td>
+<td>19033880.0</td>
+<td>19028.0</td>
+<td>19642899.0</td>
+<td>19052908.0</td>
+<td>1.236126</td>
+<td>1.030761</td>
+<td>1.030966</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>Snohomish</td>
+<td>Bothell Canyon Park</td>
+<td>5522541.0</td>
+<td>364369.0</td>
+<td>3349176.0</td>
+<td>191473.0</td>
+<td>5886910.0</td>
+<td>3540649.0</td>
+<td>1.902978</td>
+<td>1.648925</td>
+<td>1.662664</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>Snohomish</td>
+<td>Everett</td>
+<td>8854778.0</td>
+<td>3757678.0</td>
+<td>4488610.0</td>
+<td>1530123.0</td>
+<td>12612456.0</td>
+<td>6018733.0</td>
+<td>2.455801</td>
+<td>1.972722</td>
+<td>2.095533</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">37</th>
+<td>Snohomish</td>
+<td>Lynnwood</td>
+<td>8226527.0</td>
+<td>3342773.0</td>
+<td>5249562.0</td>
+<td>1013143.0</td>
+<td>11569300.0</td>
+<td>6262705.0</td>
+<td>3.299409</td>
+<td>1.567088</td>
+<td>1.847333</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">38</th>
+<td>Snohomish</td>
+<td>Paine Field / Boeing Everett</td>
+<td>15817525.0</td>
+<td>449085.0</td>
+<td>11256138.0</td>
+<td>415054.0</td>
+<td>16266610.0</td>
+<td>11671192.0</td>
+<td>1.081992</td>
+<td>1.405236</td>
+<td>1.393740</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39</th>
+<td>Snohomish</td>
+<td>Cascade</td>
+<td>12840606.0</td>
+<td>716493.0</td>
+<td>8934353.0</td>
+<td>453414.0</td>
+<td>13557099.0</td>
+<td>9387767.0</td>
+<td>1.580218</td>
+<td>1.437217</td>
+<td>1.444124</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell bslib-card html-fill-container" data-title="Activity Units by Growth Center" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Activity Units by Growth Center
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output cell-output-display html-fill-item html-fill-container" data-execution_count="16">
+<div class="html-fill-item html-fill-container">
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">county</th>
+<th data-quarto-table-cell-role="th">growth_center</th>
+<th data-quarto-table-cell-role="th">jobs</th>
+<th data-quarto-table-cell-role="th">persons</th>
+<th data-quarto-table-cell-role="th">activity_units</th>
+<th data-quarto-table-cell-role="th">acres_land</th>
+<th data-quarto-table-cell-role="th">au_acre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>King</td>
+<td>Auburn</td>
+<td>5354</td>
+<td>3612.0</td>
+<td>8966.0</td>
+<td>67.184504</td>
+<td>133.453393</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>King</td>
+<td>Bellevue</td>
+<td>52050</td>
+<td>16544.0</td>
+<td>68594.0</td>
+<td>159.317057</td>
+<td>430.550258</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>King</td>
+<td>Burien</td>
+<td>3758</td>
+<td>3851.0</td>
+<td>7609.0</td>
+<td>74.619605</td>
+<td>101.970521</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>King</td>
+<td>Federal Way</td>
+<td>2737</td>
+<td>604.0</td>
+<td>3341.0</td>
+<td>36.813315</td>
+<td>90.755206</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>King</td>
+<td>Kent</td>
+<td>6091</td>
+<td>2153.0</td>
+<td>8244.0</td>
+<td>48.740542</td>
+<td>169.140508</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>King</td>
+<td>Kirkland Totem Lake</td>
+<td>15575</td>
+<td>8227.0</td>
+<td>23802.0</td>
+<td>120.445340</td>
+<td>197.616612</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>King</td>
+<td>Redmond Downtown</td>
+<td>11142</td>
+<td>9678.0</td>
+<td>20820.0</td>
+<td>100.648714</td>
+<td>206.858082</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>King</td>
+<td>Redmond-Overlake</td>
+<td>60566</td>
+<td>7002.0</td>
+<td>67568.0</td>
+<td>204.199541</td>
+<td>330.892027</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>King</td>
+<td>Renton</td>
+<td>16601</td>
+<td>5480.0</td>
+<td>22081.0</td>
+<td>125.430441</td>
+<td>176.041795</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>King</td>
+<td>SeaTac</td>
+<td>26970</td>
+<td>11483.0</td>
+<td>38453.0</td>
+<td>99.633907</td>
+<td>385.942909</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>King</td>
+<td>Seattle Downtown</td>
+<td>229432</td>
+<td>44074.0</td>
+<td>273506.0</td>
+<td>336.272016</td>
+<td>813.347490</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>King</td>
+<td>Seattle First Hill/Capitol Hill</td>
+<td>50736</td>
+<td>52663.0</td>
+<td>103399.0</td>
+<td>286.780647</td>
+<td>360.550828</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>King</td>
+<td>Seattle Northgate</td>
+<td>9505</td>
+<td>8568.0</td>
+<td>18073.0</td>
+<td>84.523852</td>
+<td>213.821301</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>King</td>
+<td>Seattle South Lake Union</td>
+<td>54135</td>
+<td>14672.0</td>
+<td>68807.0</td>
+<td>136.082277</td>
+<td>505.627929</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>King</td>
+<td>Seattle University District</td>
+<td>36582</td>
+<td>22494.0</td>
+<td>59076.0</td>
+<td>138.528903</td>
+<td>426.452523</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>King</td>
+<td>Seattle Uptown</td>
+<td>14068</td>
+<td>12062.0</td>
+<td>26130.0</td>
+<td>130.156405</td>
+<td>200.758464</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>King</td>
+<td>Tukwila</td>
+<td>18703</td>
+<td>641.0</td>
+<td>19344.0</td>
+<td>214.265037</td>
+<td>90.280712</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>King</td>
+<td>Issaquah</td>
+<td>9877</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>King</td>
+<td>Greater Downtown Kirkland</td>
+<td>11284</td>
+<td>8190.0</td>
+<td>19474.0</td>
+<td>99.245776</td>
+<td>196.219938</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>King</td>
+<td>Ballard-Interbay</td>
+<td>17002</td>
+<td>212.0</td>
+<td>17214.0</td>
+<td>176.475895</td>
+<td>97.543067</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>King</td>
+<td>Duwamish</td>
+<td>64183</td>
+<td>426.0</td>
+<td>64609.0</td>
+<td>776.851400</td>
+<td>83.167772</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>King</td>
+<td>Kent MIC</td>
+<td>47238</td>
+<td>495.0</td>
+<td>47733.0</td>
+<td>1060.931680</td>
+<td>44.991587</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>King</td>
+<td>North Tukwila</td>
+<td>7288</td>
+<td>14.0</td>
+<td>7302.0</td>
+<td>118.874839</td>
+<td>61.425951</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>Kitsap</td>
+<td>Bremerton</td>
+<td>17655</td>
+<td>3194.0</td>
+<td>20849.0</td>
+<td>42.967126</td>
+<td>485.231432</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">24</th>
+<td>Kitsap</td>
+<td>Silverdale</td>
+<td>7500</td>
+<td>1970.0</td>
+<td>9470.0</td>
+<td>104.515174</td>
+<td>90.608852</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">25</th>
+<td>Kitsap</td>
+<td>Puget Sound Industrial Center - Bremerton</td>
+<td>349</td>
+<td>49.0</td>
+<td>398.0</td>
+<td>7.743274</td>
+<td>51.399449</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">26</th>
+<td>Pierce</td>
+<td>Lakewood</td>
+<td>5497</td>
+<td>638.0</td>
+<td>6135.0</td>
+<td>48.836364</td>
+<td>125.623604</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">27</th>
+<td>Pierce</td>
+<td>Puyallup Downtown</td>
+<td>3237</td>
+<td>1153.0</td>
+<td>4390.0</td>
+<td>31.749174</td>
+<td>138.271316</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">28</th>
+<td>Pierce</td>
+<td>Puyallup South Hill</td>
+<td>8222</td>
+<td>2723.0</td>
+<td>10945.0</td>
+<td>85.177502</td>
+<td>128.496372</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">29</th>
+<td>Pierce</td>
+<td>Tacoma Downtown</td>
+<td>46971</td>
+<td>15674.0</td>
+<td>62645.0</td>
+<td>251.638613</td>
+<td>248.948280</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">30</th>
+<td>Pierce</td>
+<td>Tacoma Mall</td>
+<td>9408</td>
+<td>6237.0</td>
+<td>15645.0</td>
+<td>101.388200</td>
+<td>154.307897</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">31</th>
+<td>Pierce</td>
+<td>University Place</td>
+<td>4154</td>
+<td>7022.0</td>
+<td>11176.0</td>
+<td>68.459550</td>
+<td>163.249685</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">32</th>
+<td>Pierce</td>
+<td>Frederickson</td>
+<td>4315</td>
+<td>665.0</td>
+<td>4980.0</td>
+<td>267.983173</td>
+<td>18.583256</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">33</th>
+<td>Pierce</td>
+<td>Port of Tacoma</td>
+<td>9359</td>
+<td>5.0</td>
+<td>9364.0</td>
+<td>217.969399</td>
+<td>42.960159</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>Pierce</td>
+<td>Sumner Pacific</td>
+<td>17759</td>
+<td>68.0</td>
+<td>17827.0</td>
+<td>437.394582</td>
+<td>40.757249</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>Snohomish</td>
+<td>Bothell Canyon Park</td>
+<td>13717</td>
+<td>668.0</td>
+<td>14385.0</td>
+<td>81.282117</td>
+<td>176.976198</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">36</th>
+<td>Snohomish</td>
+<td>Everett</td>
+<td>14300</td>
+<td>6702.0</td>
+<td>21002.0</td>
+<td>138.171097</td>
+<td>151.999951</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">37</th>
+<td>Snohomish</td>
+<td>Lynnwood</td>
+<td>15076</td>
+<td>5320.0</td>
+<td>20396.0</td>
+<td>143.771924</td>
+<td>141.863581</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">38</th>
+<td>Snohomish</td>
+<td>Paine Field / Boeing Everett</td>
+<td>37710</td>
+<td>1619.0</td>
+<td>39329.0</td>
+<td>267.933701</td>
+<td>146.786313</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">39</th>
+<td>Snohomish</td>
+<td>Cascade</td>
+<td>9265</td>
+<td>1425.0</td>
+<td>10690.0</td>
+<td>215.513476</td>
+<td>49.602467</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
+
+</div>
+</div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>

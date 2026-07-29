@@ -18,12 +18,14 @@ uv sync
 uv run quarto render au_acre_far_existing.ipynb
 ```
 
-This produces `index.html` (plus a supporting `_files/` folder) in the repo
-root.
+This produces `index.html` (plus a supporting `au_acre_far_existing_files/`
+folder) in the repo root.
 
 ## Publishing to GitHub Pages
 
-Pushing to `main` triggers [.github/workflows/publish.yml](.github/workflows/publish.yml),
-which renders the dashboard and deploys it via GitHub Pages ("Deploy from
-GitHub Actions" source). Enable that source once under
-**Settings > Pages** for the site to go live.
+The rendered `index.html` and `au_acre_far_existing_files/` are committed to
+the repo. After rendering locally, commit and push those files to `main`; the
+site is served directly from the repo via GitHub Pages ("Deploy from a
+branch" source, `main` branch, `/ (root)` folder) under
+**Settings > Pages**.
+
